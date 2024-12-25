@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Факты</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Управление фактами</h1>
+
+        <form action="/add_fact" method="POST">
+            <input type="text" name="fact" placeholder="Введите новый факт" required>
+            <button type="submit">Добавить</button>
+        </form>
+
+        <h2>Список фактов:</h2>
+        <ul>
+            {% for fact in facts %}
+                <li>{{ fact.content }}
+                    <a href="/delete_fact/{{ fact.id }}" class="delete-btn">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <form action="/start_bot" method="POST">
+            <button type="submit">Запустить бота</button>
+        </form>
+        <form action="/stop_bot" method="POST">
+            <button type="submit">Остановить бота</button>
+        </form>
+    </div>
+</body>
+</html>
